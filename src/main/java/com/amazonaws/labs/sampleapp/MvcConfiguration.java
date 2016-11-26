@@ -1,6 +1,8 @@
 package com.amazonaws.labs.sampleapp;
 
 
+import java.io.IOException;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,14 +16,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
-import com.amazonaws.services.autoscaling.AmazonAutoScaling;
-import com.amazonaws.services.autoscaling.AmazonAutoScalingClient;
+import com.amazonaws.services.cloudwatch.AmazonCloudWatch;
+import com.amazonaws.services.cloudwatch.AmazonCloudWatchClient;
 import com.amazonaws.services.codedeploy.AmazonCodeDeploy;
 import com.amazonaws.services.codedeploy.AmazonCodeDeployClient;
-import com.amazonaws.services.ec2.AmazonEC2;
-import com.amazonaws.services.ec2.AmazonEC2Client;
-
-import java.io.IOException;
 
 @EnableWebMvc
 @ComponentScan(basePackages = {"com.amazonaws.labs.sampleapp"})
@@ -57,15 +55,8 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public AmazonEC2 ec2() {
-        final AmazonEC2 client = new AmazonEC2Client();
-        client.setRegion(region);
-        return client;
-    }
-    
-    @Bean
-    public AmazonAutoScaling autoScaling() {
-        AmazonAutoScaling client = new AmazonAutoScalingClient();
+    public AmazonCloudWatch amazonCloudWatch() {
+        final AmazonCloudWatch client = new AmazonCloudWatchClient();
         client.setRegion(region);
         return client;
     }
