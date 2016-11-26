@@ -35,6 +35,7 @@ public class IndexController {
         LOGGER.info("Application name set to: " + applicationName);
         LOGGER.info("Deployment Group Name set to: " + deploymentGroupName);
         LOGGER.info("Returning metrics for Namespace:" + applicationName + "-" + deploymentGroupName);
+        emitMetrics(applicationName +"-" + deploymentGroupName);
         return "/index";
     }
 
